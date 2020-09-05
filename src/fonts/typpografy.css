@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "Savate";
+  src: url("savate.woff2") format("woff2"), url("savate.woff") format("woff");
+}
+@font-face {
+  font-family: "vg5000";
+  src: url("vg5000.woff2") format("woff2"), url("vg5000.woff") format("woff");
+}

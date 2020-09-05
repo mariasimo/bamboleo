@@ -14,7 +14,7 @@ import Header from "./header"
 
 const GlobalStyle = createGlobalStyle`
   body {
-    font-family: sans-serif;
+    font-family: 'vg5000', sans-serif;
   }`
 
 const Layout = ({ children }) => {
