@@ -1,9 +1,10 @@
+/** @jsx jsx */
+import { jsx } from "theme-ui"
+
 import React from "react"
 import styled from "styled-components"
 
 const HeaderWrapper = styled.header`
-  margin: 3rem auto;
-  max-width: 640px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,6 +13,9 @@ const HeaderWrapper = styled.header`
 
 const Menu = styled.nav`
   width: 100%;
+  max-width: 640px;
+  padding: 2rem;
+
   ul {
     margin: 0;
     padding: 0;
@@ -21,8 +25,13 @@ const Menu = styled.nav`
   }
 `
 
-const Header = () => (
-  <HeaderWrapper>
+const Header = props => (
+  <HeaderWrapper
+    sx={{
+      color: "primary",
+      background: "#000",
+    }}
+  >
     <Menu>
       <ul>
         <li>
