@@ -12,11 +12,19 @@ const Section = styled.section`
   justify-content: center;
 `
 
+const MainTitle = styled.h1`
+  font-family: "Savate";
+  font-size: 8rem;
+  text-transform: uppercase;
+  letter-spacing: -0.75rem;
+  line-height: 1;
+`
+
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
     <Section>
-      <h1>Bamboleo, bambolea</h1>
+      <MainTitle>Bamboleo, bambolea</MainTitle>
     </Section>
   </Layout>
 )
