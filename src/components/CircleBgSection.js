@@ -11,7 +11,7 @@ const Section = styled.section`
   align-items: center;
   justify-content: center;
   text-align: center;
-  height: 100vh;
+  height: 100%;
   position: relative;
 `
 
@@ -52,7 +52,7 @@ const StickyBox = styled.div`
   position: -webkit-sticky;
   top: 0;
   width: 100%;
-  height: 90vh;
+  height: 100vh;
 `
 
 const CircleBgSection = () => {
@@ -88,8 +88,8 @@ const CircleBgSection = () => {
     }
   }, [containerElRef, innerElRef])
 
-  const offset = 0
-  const transformInitialValue = containerElTop
+  const offset = -2
+  const transformInitialValue = containerElTop + innerElHeight / offset
   const transformFinalValue = containerElBottom - innerElHeight
 
   let transformValue = useTransform(
@@ -99,59 +99,63 @@ const CircleBgSection = () => {
   )
 
   return (
-    <Container ref={containerElRef}>
-      <StickyBox ref={innerElRef}>
-        {containerElTop &&
-          containerElBottom &&
-          innerElHeight &&
-          transformValue && (
-            <Section
-              sx={{
-                color: "primary",
-                background: "#000",
-              }}
-            >
-              <svg
+    <>
+      <Container ref={containerElRef}>
+        <StickyBox ref={innerElRef}>
+          {containerElTop &&
+            containerElBottom &&
+            innerElHeight &&
+            transformValue && (
+              <Section
                 sx={{
-                  position: "absolute",
-                  width: "100vw",
-                  height: "100%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  color: "primary",
+                  background: "#000",
                 }}
               >
-                <defs>
-                  <clipPath id="clippath">
-                    <motion.circle
-                      cx="50%"
-                      cy="50%"
-                      initial={{ r: "30" }}
-                      style={{
-                        r: transformValue,
-                      }}
-                    ></motion.circle>
-                  </clipPath>
-                </defs>
-              </svg>
-              <Background sx={{ clipPath: "url(#clippath)" }}>
-                <Title
+                <svg
                   sx={{
-                    color: "#f9cb29",
-                    textShadow:
-                      "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black",
+                    position: "absolute",
+                    width: "100vw",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
                 >
-                  Ese amor llega así de esa manera
-                </Title>
-                <Paragraph sx={{ color: "text" }}>No tiene la culpa</Paragraph>
-              </Background>
-              <Title>Ese amor llega así de esa manera</Title>
-              <Paragraph>No tiene la culpa</Paragraph>
-            </Section>
-          )}
-      </StickyBox>
-    </Container>
+                  <defs>
+                    <clipPath id="clippath">
+                      <motion.circle
+                        cx="50%"
+                        cy="50%"
+                        initial={{ r: "30" }}
+                        style={{
+                          r: transformValue,
+                        }}
+                      ></motion.circle>
+                    </clipPath>
+                  </defs>
+                </svg>
+                <Background sx={{ clipPath: "url(#clippath)" }}>
+                  <Title
+                    sx={{
+                      color: "#f9cb29",
+                      textShadow:
+                        "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black",
+                    }}
+                  >
+                    Ese amor llega así de esa manera
+                  </Title>
+                  <Paragraph sx={{ color: "text" }}>
+                    No tiene la culpa
+                  </Paragraph>
+                </Background>
+                <Title>Ese amor llega así de esa manera</Title>
+                <Paragraph>No tiene la culpa</Paragraph>
+              </Section>
+            )}
+        </StickyBox>
+      </Container>
+    </>
   )
 }
 

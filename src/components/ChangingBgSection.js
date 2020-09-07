@@ -1,84 +1,89 @@
-import React, {
-  useRef,
-  useState,
-  useEffect,
-  useLayoutEffect,
-  createRef,
-} from "react"
-import {
-  motion,
-  useTransform,
-  useViewportScroll,
-  useElementScroll,
-} from "framer-motion"
+import React, { useState, useRef, useEffect } from "react"
+import { motion, useTransform, useViewportScroll } from "framer-motion"
 import styled from "styled-components"
 
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 
+const Section = styled.section`
+  border: 1px solid red;
+  height: 400vh;
+`
+
 const Background = styled.div`
+  border: 1px solid blue;
+  width: 100%;
+  height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  width: 100%;
-  height: 200vh;
-  position: relative;
-`
-
-const Title = styled.h2`
-  font-family: "Savate";
-  font-size: 6rem;
-  line-height: 1.2;
-`
-
-const Paragraph = styled.p`
-  font-family: "vg5000";
-  font-size: 1.5rem;
-  text-stroke: 0.2rem;
-  line-height: 1.2;
-`
-
-const Container = styled.div`
-  height: 200vh;
-`
-
-const StickyBox = styled.div`
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0;
-  width: 100%;
-  height: 90vh;
 `
 
 const ChangingBgSection = () => {
-  const [elementTop, setElementTop] = useState(null)
   const ref = useRef(null)
   const { scrollY } = useViewportScroll()
 
-  const opacity = useTransform(
+  const [elTop, setElTop] = useState(null)
+  const [elHeight, setElHeight] = useState(null)
+
+  useEffect(() => {
+    if (!ref.current) return
+    const rect = ref.current.getBoundingClientRect()
+    setElTop(window.pageYOffset + rect.top)
+
+    setElHeight(window.pageYOffset + rect.top + rect.height)
+
+    window.addEventListener("scroll", () => {
+      console.log(scrollY.current, elTop + elHeight / 3, elTop + elHeight)
+    })
+  }, [ref])
+
+  let opacity = useTransform(scrollY, [elTop + 5, elTop + elHeight / 3], [1, 0])
+
+  let opacity2 = useTransform(
     scrollY,
-    [elementTop, elementTop + elementTop / 5],
+    [elTop + elHeight / 3, elTop + elHeight],
     [1, 0]
   )
 
-  useLayoutEffect(() => {
-    if (!ref.current) return
-    setElementTop(ref.current.offsetTop)
-  }, [ref])
-
   return (
-    <Container ref={ref}>
-      <motion.div
-        initial={{ background: "#f9cb29" }}
-        style={{
-          opacity,
-        }}
-      >
-        <Background>Holi</Background>
-      </motion.div>
-    </Container>
+    <Section ref={ref} sx={{ position: "relative", background: "green" }}>
+      {elTop && elHeight && (
+        <>
+          <motion.div
+            sx={{
+              position: "absolute",
+              top: "0",
+              bottom: "0",
+              left: "0",
+              right: "0",
+              height: "100%",
+              zIndex: "1",
+            }}
+            style={{
+              opacity,
+            }}
+          >
+            <Background sx={{ background: "gold" }}>Holi</Background>
+          </motion.div>
+          <motion.div
+            sx={{
+              position: "absolute",
+              top: "0",
+              bottom: "0",
+              left: "0",
+              right: "0",
+              height: "100%",
+            }}
+            style={{
+              opacity: opacity2,
+            }}
+          >
+            <Background sx={{ background: "white" }}>Holi</Background>
+          </motion.div>
+        </>
+      )}
+    </Section>
   )
 }
 

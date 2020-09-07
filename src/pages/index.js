@@ -8,6 +8,7 @@ import React, { useRef, useState, useLayoutEffect, useEffect } from "react"
 import { motion, useTransform, useViewportScroll } from "framer-motion"
 import styled from "styled-components"
 import CircleBgSection from "../components/CircleBgSection"
+import ChangingBgSection from "../components/ChangingBgSection"
 
 const Section = styled.section`
   display: flex;
@@ -61,6 +62,7 @@ const IndexPage = () => {
           </MainTitle>
         </Section>
         <CircleBgSection />
+        <ChangingBgSection />
       </Layout>
     </>
   )
