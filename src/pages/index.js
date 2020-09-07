@@ -60,6 +60,20 @@ const IndexPage = () => {
 
         <CircleBgSection />
         <ChangingBgSection />
+
+        <div sx={{ background: "#000", height: "100vh", position: "relative" }}>
+          <div
+            sx={{
+              background: "#E79FB9",
+              height: "20vh",
+              clipPath: "circle(15rem at 50% 50%)",
+              position: "absolute",
+              top: "-50%",
+              height: "100%",
+              width: "100%",
+            }}
+          ></div>
+        </div>
       </Layout>
     </>
   )

@@ -6,7 +6,7 @@ import styled from "styled-components"
 import { jsx } from "theme-ui"
 
 const Section = styled.section`
-  height: 280vh;
+  height: 240vh;
 `
 
 const Container = styled(motion.div)`
@@ -58,7 +58,7 @@ const ChangingBgSection = ({ children }) => {
             background: bgColor,
           }}
         >
-          <div sx={{ paddingBottom: "50%" }}>
+          <div>
             <Paragraph>
               Caballo de danza vana
               <br />
