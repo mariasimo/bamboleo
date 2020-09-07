@@ -11,6 +11,10 @@ import CircleBgSection from "../components/CircleBgSection"
 import ChangingBgSection from "../components/ChangingBgSection"
 
 const Section = styled.section`
+  padding-bottom: 20vh;
+`
+
+const Inner = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,16 +22,6 @@ const Section = styled.section`
   text-align: center;
   height: 90vh;
   position: relative;
-
-  .background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    background: #f9cb29;
-  }
 `
 
 const MainTitle = styled.h1`
@@ -57,14 +51,15 @@ const IndexPage = () => {
             background: "#000",
           }}
         >
-          <MainTitle>
-            Bamboleo, <span>bambolea</span>
-          </MainTitle>
+          <Inner>
+            <MainTitle>
+              Bamboleo, <span>bambolea</span>
+            </MainTitle>
+          </Inner>
         </Section>
 
-        <ChangingBgSection>
-          <CircleBgSection />
-        </ChangingBgSection>
+        <CircleBgSection />
+        <ChangingBgSection />
       </Layout>
     </>
   )

@@ -5,7 +5,7 @@ import React, { useRef, useState, useEffect } from "react"
 import { motion, useTransform, useViewportScroll } from "framer-motion"
 import styled from "styled-components"
 
-const Section = styled.section`
+const Section = styled(motion.section)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,7 +15,7 @@ const Section = styled.section`
   position: relative;
 `
 
-const Background = styled(motion.div)`
+const Background = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,7 +29,7 @@ const Background = styled(motion.div)`
   width: 100%;
 `
 
-const Title = styled(motion.h2)`
+const Title = styled.h2`
   font-family: "Savate";
   font-size: 6rem;
   line-height: 1.2;
@@ -43,7 +43,7 @@ const Paragraph = styled.p`
 `
 
 const Container = styled.div`
-  height: 120vh;
+  height: 200vh;
 `
 
 const StickyBox = styled.div`
@@ -91,7 +91,7 @@ const CircleBgSection = ({ bgColor }) => {
   const transformInitialValue = containerElTop + innerElHeight / offset
   const transformFinalValue = containerElBottom - innerElHeight
 
-  let transformValue = useTransform(
+  let radius = useTransform(
     scrollY,
     [transformInitialValue, transformFinalValue],
     [0, 1000]
@@ -101,62 +101,54 @@ const CircleBgSection = ({ bgColor }) => {
     <>
       <Container ref={containerElRef}>
         <StickyBox ref={innerElRef}>
-          {containerElTop &&
-            containerElBottom &&
-            innerElHeight &&
-            transformValue && (
-              <Section
+          {containerElTop && containerElBottom && innerElHeight && (
+            <Section
+              sx={{
+                color: "primary",
+                background: "#000",
+              }}
+            >
+              <svg
                 sx={{
-                  color: "primary",
-                  background: "#000",
+                  position: "absolute",
+                  width: "100vw",
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-                <svg
+                <defs>
+                  <clipPath id="clippath">
+                    <motion.circle
+                      cx="50%"
+                      cy="50%"
+                      initial={{ r: "30" }}
+                      style={{
+                        r: radius,
+                      }}
+                    ></motion.circle>
+                  </clipPath>
+                </defs>
+              </svg>
+              <Background
+                sx={{ background: "#f9cb29", clipPath: "url(#clippath)" }}
+              >
+                <Title
                   sx={{
-                    position: "absolute",
-                    width: "100vw",
-                    height: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                    color: "#f9cb29",
+                    textShadow:
+                      "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black",
                   }}
                 >
-                  <defs>
-                    <clipPath id="clippath">
-                      <motion.circle
-                        cx="50%"
-                        cy="50%"
-                        initial={{ r: "30" }}
-                        style={{
-                          r: transformValue,
-                        }}
-                      ></motion.circle>
-                    </clipPath>
-                  </defs>
-                </svg>
-                <Background
-                  sx={{ clipPath: "url(#clippath)" }}
-                  style={{
-                    background: bgColor,
-                  }}
-                >
-                  <Title
-                    style={{ color: bgColor }}
-                    sx={{
-                      textShadow:
-                        "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black",
-                    }}
-                  >
-                    Ese amor llega así de esa manera
-                  </Title>
-                  <Paragraph sx={{ color: "text" }}>
-                    No tiene la culpa
-                  </Paragraph>
-                </Background>
-                <Title>Ese amor llega así de esa manera</Title>
-                <Paragraph>No tiene la culpa</Paragraph>
-              </Section>
-            )}
+                  Ese amor llega así de esa manera
+                </Title>
+                <Paragraph sx={{ color: "text" }}>No tiene la culpa</Paragraph>
+              </Background>
+              <Title>Ese amor llega así de esa manera</Title>
+              <Paragraph>No tiene la culpa</Paragraph>
+            </Section>
+          )}
         </StickyBox>
       </Container>
     </>
