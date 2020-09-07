@@ -1,11 +1,13 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 
-import React, { useRef } from "react"
-import styled from "styled-components"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { motion } from "framer-motion"
+
+import React, { useRef, useState, useLayoutEffect, useEffect } from "react"
+import { motion, useTransform, useViewportScroll } from "framer-motion"
+import styled from "styled-components"
+import CircleBgSection from "../components/CircleBgSection"
 
 const Section = styled.section`
   display: flex;
@@ -43,77 +45,25 @@ const MainTitle = styled.h1`
   }
 `
 
-const Title = styled.h2`
-  font-family: "Savate";
-  font-size: 6rem;
-  line-height: 1.2;
-`
-
-const Paragraph = styled.p`
-  font-family: "vg5000";
-  font-size: 1.5rem;
-  text-stroke: 0.2rem;
-  line-height: 1.2;
-`
-
-const sidebar = {
-  open: (height = 1000) => ({
-    clipPath: `circle(${height * 2 + 200}px at 50% 50%)`,
-    transition: {
-      type: "spring",
-      stiffness: 20,
-      restDelta: 2,
-    },
-  }),
-  closed: {
-    clipPath: "circle(30px at 50% 50%)",
-    transition: {
-      delay: 0.5,
-      type: "spring",
-      stiffness: 400,
-      damping: 40,
-    },
-  },
+const IndexPage = () => {
+  return (
+    <>
+      <Layout>
+        <SEO title="Home" />
+        <Section
+          sx={{
+            color: "primary",
+            background: "#000",
+          }}
+        >
+          <MainTitle>
+            Bamboleo, <span>bambolea</span>
+          </MainTitle>
+        </Section>
+        <CircleBgSection />
+      </Layout>
+    </>
+  )
 }
-
-const CircleBgSection = () => (
-  <Section
-    sx={{
-      color: "primary",
-      background: "#000",
-    }}
-  >
-    <motion.div
-      className="background"
-      variants={sidebar}
-      initial={false}
-      animate="closed"
-    >
-      <Title sx={{ color: "red", position: "absolute", top: "19%" }}>
-        Ese amor llega así de esa manera
-      </Title>
-    </motion.div>
-
-    <Title>Ese amor llega así de esa manera</Title>
-    <Paragraph>No tiene la culpa</Paragraph>
-  </Section>
-)
-
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <Section
-      sx={{
-        color: "primary",
-        background: "#000",
-      }}
-    >
-      <MainTitle>
-        Bamboleo, <span>bambolea</span>
-      </MainTitle>
-    </Section>
-    <CircleBgSection />
-  </Layout>
-)
 
 export default IndexPage
