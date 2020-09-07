@@ -15,7 +15,7 @@ const Section = styled.section`
   position: relative;
 `
 
-const Background = styled.div`
+const Background = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,10 +27,9 @@ const Background = styled.div`
   right: 0;
   bottom: 0;
   width: 100%;
-  background: #f9cb29;
 `
 
-const Title = styled.h2`
+const Title = styled(motion.h2)`
   font-family: "Savate";
   font-size: 6rem;
   line-height: 1.2;
@@ -44,7 +43,7 @@ const Paragraph = styled.p`
 `
 
 const Container = styled.div`
-  height: 200vh;
+  height: 120vh;
 `
 
 const StickyBox = styled.div`
@@ -55,7 +54,7 @@ const StickyBox = styled.div`
   height: 100vh;
 `
 
-const CircleBgSection = () => {
+const CircleBgSection = ({ bgColor }) => {
   const innerElRef = useRef(null)
   const containerElRef = useRef(null)
 
@@ -135,10 +134,15 @@ const CircleBgSection = () => {
                     </clipPath>
                   </defs>
                 </svg>
-                <Background sx={{ clipPath: "url(#clippath)" }}>
+                <Background
+                  sx={{ clipPath: "url(#clippath)" }}
+                  style={{
+                    background: bgColor,
+                  }}
+                >
                   <Title
+                    style={{ color: bgColor }}
                     sx={{
-                      color: "#f9cb29",
                       textShadow:
                         "-1px 0 black, 0 1px black, 1px 0 black, 0 -1px black",
                     }}

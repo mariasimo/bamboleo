@@ -61,8 +61,10 @@ const IndexPage = () => {
             Bamboleo, <span>bambolea</span>
           </MainTitle>
         </Section>
-        <CircleBgSection />
-        <ChangingBgSection />
+
+        <ChangingBgSection>
+          <CircleBgSection />
+        </ChangingBgSection>
       </Layout>
     </>
   )
