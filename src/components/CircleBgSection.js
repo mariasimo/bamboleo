@@ -31,8 +31,9 @@ const Background = styled.div`
 
 const Title = styled.h2`
   font-family: "Savate";
-  font-size: 6rem;
+  font-size: 7rem;
   line-height: 1.2;
+  max-width: 960px;
 `
 
 const Paragraph = styled.p`
@@ -87,7 +88,7 @@ const CircleBgSection = ({ bgColor }) => {
     }
   }, [containerElRef, innerElRef])
 
-  const offset = -2
+  const offset = -2.5
   const transformInitialValue = containerElTop + innerElHeight / offset
   const transformFinalValue = containerElBottom - innerElHeight
 
@@ -122,7 +123,7 @@ const CircleBgSection = ({ bgColor }) => {
                   <clipPath id="clippath">
                     <motion.circle
                       cx="50%"
-                      cy="50%"
+                      cy="45%"
                       initial={{ r: "30" }}
                       style={{
                         r: radius,

@@ -9,6 +9,7 @@ import { motion, useTransform, useViewportScroll } from "framer-motion"
 import styled from "styled-components"
 import CircleBgSection from "../components/CircleBgSection"
 import ChangingBgSection from "../components/ChangingBgSection"
+import RotatingStarSection from "../components/RotatingStarSection"
 
 const Section = styled.section`
   padding-bottom: 20vh;
@@ -60,20 +61,7 @@ const IndexPage = () => {
 
         <CircleBgSection />
         <ChangingBgSection />
-
-        <div sx={{ background: "#000", height: "100vh", position: "relative" }}>
-          <div
-            sx={{
-              background: "#E79FB9",
-              height: "20vh",
-              clipPath: "circle(15rem at 50% 50%)",
-              position: "absolute",
-              top: "-50%",
-              height: "100%",
-              width: "100%",
-            }}
-          ></div>
-        </div>
+        <RotatingStarSection />
       </Layout>
     </>
   )
